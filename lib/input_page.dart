@@ -38,16 +38,24 @@ class _InputPageState extends State<InputPage> {
             bodyParamsSelector(),
 
             // calculate button
-            Container(
-              height: 80.0,
-              color: Colors.pink,
-              margin: const EdgeInsets.only(top: 12.0),
-              width: double.infinity,
-              child: const Center(
-                  child: Text(
-                "Calculate",
-                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w800),
-              )),
+            TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, "/result");
+              },
+              child: Container(
+                color: Colors.pink,
+                padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
+                margin: const EdgeInsets.only(top: 12.0),
+                width: double.infinity,
+                child: const Center(
+                    child: Text(
+                  "Calculate",
+                  style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.w800,
+                      color: Colors.white),
+                )),
+              ),
             ),
           ],
         )),
