@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'constants.dart';
 import 'info_container.dart';
 import 'info_content.dart';
-
-const Color activeBoxBgColor = Color(0xFF1D1E33);
-const Color inactiveBoxBgColor = Color(0xFF111328);
 
 enum Gender {
   male,
@@ -21,6 +19,7 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   Gender selectedGender = Gender.none;
+  int height = 120;
 
   @override
   Widget build(BuildContext context) {
@@ -31,47 +30,11 @@ class _InputPageState extends State<InputPage> {
       body: SafeArea(
         child: (Column(
           children: [
-            Expanded(
-              child: Row(
-                children: [
-                  InfoContainer(
-                    onTapButton: () {
-                      setState(() {
-                        selectedGender = Gender.male;
-                      });
-                    },
-                    userCardColor: (selectedGender == Gender.male
-                        ? activeBoxBgColor
-                        : inactiveBoxBgColor),
-                    userCardBody: InfoContent(
-                        userIcon: FontAwesomeIcons.mars, userGender: "MALE"),
-                  ),
-                  InfoContainer(
-                    onTapButton: () {
-                      setState(() {
-                        selectedGender = Gender.female;
-                      });
-                    },
-                    userCardColor: (selectedGender == Gender.female
-                        ? activeBoxBgColor
-                        : inactiveBoxBgColor),
-                    userCardBody: InfoContent(
-                      userIcon: FontAwesomeIcons.venus,
-                      userGender: "FEMALE",
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            InfoContainer(userCardColor: activeBoxBgColor),
-            Expanded(
-              child: Row(
-                children: [
-                  InfoContainer(userCardColor: activeBoxBgColor),
-                  InfoContainer(userCardColor: activeBoxBgColor),
-                ],
-              ),
-            ),
+            genderSelector(),
+            heightSlider(),
+            bodyParamsSelector(),
+
+            // calculate button
             Container(
               height: 80.0,
               color: Colors.pink,
@@ -85,6 +48,92 @@ class _InputPageState extends State<InputPage> {
             ),
           ],
         )),
+      ),
+    );
+  }
+
+  InfoContainer heightSlider() => InfoContainer(
+        userCardColor: kActiveBoxBgColor,
+        userCardBody: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              "Height",
+              style: kLabelStyle,
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 12.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.baseline,
+              textBaseline: TextBaseline.alphabetic,
+              children: [
+                Text(
+                  height.toString(),
+                  style: kContentValueStyle,
+                ),
+                const Text("cm")
+              ],
+            ),
+            Slider(
+              value: height.toDouble(),
+              onChanged: (double selectedHeight) {
+                setState(() {
+                  height = selectedHeight.round();
+                });
+              },
+              min: kSliderMinValue,
+              max: kSliderMaxValue,
+              activeColor: kSliderActiveColor,
+              inactiveColor: kSliderInActiveColor,
+            )
+          ],
+        ),
+      );
+
+  Expanded bodyParamsSelector() {
+    return Expanded(
+      child: Row(
+        children: [
+          InfoContainer(userCardColor: kActiveBoxBgColor),
+          InfoContainer(userCardColor: kActiveBoxBgColor),
+        ],
+      ),
+    );
+  }
+
+  Expanded genderSelector() {
+    return Expanded(
+      child: Row(
+        children: [
+          InfoContainer(
+            onTapButton: () {
+              setState(() {
+                selectedGender = Gender.male;
+              });
+            },
+            userCardColor: (selectedGender == Gender.male
+                ? kActiveBoxBgColor
+                : kInActiveBoxBgColor),
+            userCardBody: InfoContent(
+                userIcon: FontAwesomeIcons.mars, userGender: "MALE"),
+          ),
+          InfoContainer(
+            onTapButton: () {
+              setState(() {
+                selectedGender = Gender.female;
+              });
+            },
+            userCardColor: (selectedGender == Gender.female
+                ? kActiveBoxBgColor
+                : kInActiveBoxBgColor),
+            userCardBody: InfoContent(
+              userIcon: FontAwesomeIcons.venus,
+              userGender: "FEMALE",
+            ),
+          ),
+        ],
       ),
     );
   }
