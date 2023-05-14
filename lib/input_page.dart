@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'action_button.dart';
 import 'constants.dart';
 import 'info_container.dart';
 import 'info_content.dart';
@@ -20,6 +21,7 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
   Gender selectedGender = Gender.none;
   int height = 120;
+  int weight = 50;
 
   @override
   Widget build(BuildContext context) {
@@ -53,8 +55,8 @@ class _InputPageState extends State<InputPage> {
   }
 
   InfoContainer heightSlider() => InfoContainer(
-        userCardColor: kActiveBoxBgColor,
-        userCardBody: Column(
+        cardColor: kActiveBoxBgColor,
+        bodyContent: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -104,11 +106,47 @@ class _InputPageState extends State<InputPage> {
       );
 
   Expanded bodyParamsSelector() {
+    void onPressAction(bool? isIncreement) {
+      if (isIncreement == true) {
+        setState(() {
+          weight++;
+        });
+      } else {
+        setState(() {
+          weight--;
+        });
+      }
+    }
+
     return Expanded(
       child: Row(
         children: [
-          InfoContainer(userCardColor: kActiveBoxBgColor),
-          InfoContainer(userCardColor: kActiveBoxBgColor),
+          InfoContainer(
+            cardColor: kActiveBoxBgColor,
+            bodyContent:
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+              const Text("Weight", style: kLabelStyle),
+              Text(weight.toString(), style: kContentValueStyle),
+              const SizedBox(
+                height: 8.0,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ActionButton(
+                      icon: FontAwesomeIcons.minus,
+                      onPress: () => onPressAction(false)),
+                  const SizedBox(
+                    width: 12.0,
+                  ),
+                  ActionButton(
+                      icon: FontAwesomeIcons.plus,
+                      onPress: () => onPressAction(true)),
+                ],
+              )
+            ]),
+          ),
+          const InfoContainer(cardColor: kActiveBoxBgColor),
         ],
       ),
     );
@@ -119,29 +157,29 @@ class _InputPageState extends State<InputPage> {
       child: Row(
         children: [
           InfoContainer(
-            onTapButton: () {
+            onTap: () {
               setState(() {
                 selectedGender = Gender.male;
               });
             },
-            userCardColor: (selectedGender == Gender.male
+            cardColor: (selectedGender == Gender.male
                 ? kActiveBoxBgColor
                 : kInActiveBoxBgColor),
-            userCardBody: InfoContent(
-                userIcon: FontAwesomeIcons.mars, userGender: "MALE"),
+            bodyContent:
+                const InfoContent(icon: FontAwesomeIcons.mars, gender: "MALE"),
           ),
           InfoContainer(
-            onTapButton: () {
+            onTap: () {
               setState(() {
                 selectedGender = Gender.female;
               });
             },
-            userCardColor: (selectedGender == Gender.female
+            cardColor: (selectedGender == Gender.female
                 ? kActiveBoxBgColor
                 : kInActiveBoxBgColor),
-            userCardBody: InfoContent(
-              userIcon: FontAwesomeIcons.venus,
-              userGender: "FEMALE",
+            bodyContent: const InfoContent(
+              icon: FontAwesomeIcons.venus,
+              gender: "FEMALE",
             ),
           ),
         ],

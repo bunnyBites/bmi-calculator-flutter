@@ -2,17 +2,14 @@ import 'package:flutter/material.dart';
 import 'constants.dart';
 
 class InfoContent extends StatelessWidget {
-  IconData? icon;
-  String gender = "";
+  final IconData? icon;
+  final String? gender;
 
-  InfoContent({
+  const InfoContent({
     super.key,
-    userIcon,
-    userGender,
-  }) {
-    icon = userIcon;
-    gender = userGender;
-  }
+    this.icon,
+    this.gender,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +22,7 @@ class InfoContent extends StatelessWidget {
         ),
         const SizedBox(height: 15.0),
         Text(
-          gender,
+          gender!,
           style: kLabelStyle,
         )
       ],

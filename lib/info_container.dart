@@ -2,15 +2,11 @@ import 'package:flutter/material.dart';
 
 
 class InfoContainer extends StatelessWidget {
-  Color? cardColor;
-  Widget? bodyContent;
-  Function? onTap;
+  final Color? cardColor;
+  final Widget? bodyContent;
+  final Function? onTap;
 
-  InfoContainer({super.key,  userCardColor, userCardBody, onTapButton}) {
-    bodyContent = userCardBody;
-    cardColor = userCardColor;
-    onTap = onTapButton;
-  }
+  const InfoContainer({super.key,  this.cardColor, this.bodyContent, this.onTap});
 
   @override
   Widget build(BuildContext context) {
