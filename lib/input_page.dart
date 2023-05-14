@@ -22,6 +22,7 @@ class _InputPageState extends State<InputPage> {
   Gender selectedGender = Gender.none;
   int height = 120;
   int weight = 50;
+  int age = 20;
 
   @override
   Widget build(BuildContext context) {
@@ -106,18 +107,6 @@ class _InputPageState extends State<InputPage> {
       );
 
   Expanded bodyParamsSelector() {
-    void onPressAction(bool? isIncreement) {
-      if (isIncreement == true) {
-        setState(() {
-          weight++;
-        });
-      } else {
-        setState(() {
-          weight--;
-        });
-      }
-    }
-
     return Expanded(
       child: Row(
         children: [
@@ -135,18 +124,63 @@ class _InputPageState extends State<InputPage> {
                 children: [
                   ActionButton(
                       icon: FontAwesomeIcons.minus,
-                      onPress: () => onPressAction(false)),
+                      onPress: () {
+                        setState(() {
+                          weight--;
+                        });
+                      }),
                   const SizedBox(
                     width: 12.0,
                   ),
                   ActionButton(
-                      icon: FontAwesomeIcons.plus,
-                      onPress: () => onPressAction(true)),
+                    icon: FontAwesomeIcons.plus,
+                    onPress: () {
+                      setState(() {
+                        weight++;
+                      });
+                    },
+                  ),
                 ],
               )
             ]),
           ),
-          const InfoContainer(cardColor: kActiveBoxBgColor),
+          InfoContainer(
+              cardColor: kActiveBoxBgColor,
+              bodyContent: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    "Age",
+                    style: kLabelStyle,
+                  ),
+                  Text(
+                    age.toString(),
+                    style: kContentValueStyle,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ActionButton(
+                        icon: FontAwesomeIcons.minus,
+                        onPress: () {
+                          setState(() {
+                            age--;
+                          });
+                        },
+                      ),
+                      const SizedBox(width: 12.0),
+                      ActionButton(
+                        icon: FontAwesomeIcons.plus,
+                        onPress: () {
+                          setState(() {
+                            age++;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              )),
         ],
       ),
     );
