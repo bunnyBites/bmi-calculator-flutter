@@ -17,3 +17,21 @@ const kContentValueStyle = TextStyle(
   fontWeight: FontWeight.w900,
   fontSize: 50.0,
 );
+
+const kResultHeaderTitleTextStyle = TextStyle(
+  fontSize: 50.0,
+  fontWeight: FontWeight.bold,
+);
+
+const kResultBMIFeedbackTextStyle = TextStyle(
+  color: Color(0xFF24D876),
+  fontSize: 26.0,
+  fontWeight: FontWeight.bold,
+);
+
+const kLargeButtonTextStyle =
+    TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold, color: Colors.white);
+
+const kResultBMIDescriptionTextStyle = TextStyle(
+  fontSize: 22.0,
+);

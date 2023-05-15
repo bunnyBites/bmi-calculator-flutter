@@ -1,9 +1,10 @@
+import 'package:bmi_calculator_flutter/components/action_button.dart';
+import 'package:bmi_calculator_flutter/components/footer_button.dart';
+import 'package:bmi_calculator_flutter/components/info_container.dart';
+import 'package:bmi_calculator_flutter/components/info_content.dart';
+import 'package:bmi_calculator_flutter/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'action_button.dart';
-import 'constants.dart';
-import 'info_container.dart';
-import 'info_content.dart';
 
 enum Gender {
   male,
@@ -38,25 +39,11 @@ class _InputPageState extends State<InputPage> {
             bodyParamsSelector(),
 
             // calculate button
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, "/result");
-              },
-              child: Container(
-                color: Colors.pink,
-                padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
-                margin: const EdgeInsets.only(top: 12.0),
-                width: double.infinity,
-                child: const Center(
-                    child: Text(
-                  "Calculate",
-                  style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.w800,
-                      color: Colors.white),
-                )),
-              ),
-            ),
+            FooterButton(
+                label: "CALCULATE",
+                onPress: () {
+                  Navigator.pushNamed(context, "/result");
+                }),
           ],
         )),
       ),
