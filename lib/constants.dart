@@ -5,7 +5,7 @@ const Color kInActiveBoxBgColor = Color(0xFF111328);
 const Color kSliderActiveColor = Color(0xFFEB1555);
 const Color kSliderInActiveColor = Color(0xFF8D8E98);
 
-const double kSliderMinValue = 120.0;
+const double kSliderMinValue = 150.0;
 const double kSliderMaxValue = 220.0;
 
 const kLabelStyle = TextStyle(

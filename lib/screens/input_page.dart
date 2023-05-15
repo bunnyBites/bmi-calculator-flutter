@@ -1,8 +1,10 @@
+import 'package:bmi_calculator_flutter/calculate_brain.dart';
 import 'package:bmi_calculator_flutter/components/action_button.dart';
 import 'package:bmi_calculator_flutter/components/footer_button.dart';
 import 'package:bmi_calculator_flutter/components/info_container.dart';
 import 'package:bmi_calculator_flutter/components/info_content.dart';
 import 'package:bmi_calculator_flutter/constants.dart';
+import 'package:bmi_calculator_flutter/screens/result_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -21,8 +23,8 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   Gender selectedGender = Gender.none;
-  int height = 120;
-  int weight = 50;
+  int height = 150;
+  int weight = 60;
   int age = 20;
 
   @override
@@ -42,7 +44,20 @@ class _InputPageState extends State<InputPage> {
             FooterButton(
                 label: "CALCULATE",
                 onPress: () {
-                  Navigator.pushNamed(context, "/result");
+                  CalculateBrain calculateBrain =
+                      CalculateBrain(height: height, weight: weight);
+
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ResultPage(
+                        bmiFeedbackDescription:
+                            calculateBrain.getBMIDescription(),
+                        bmiFeedbackTitle: calculateBrain.getBMIFeedback(),
+                        calculatedBMI: calculateBrain.getCalculatedBMI(),
+                      ),
+                    ),
+                  );
                 }),
           ],
         )),

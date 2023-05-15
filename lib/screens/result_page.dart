@@ -4,7 +4,16 @@ import 'package:bmi_calculator_flutter/constants.dart';
 import 'package:flutter/material.dart';
 
 class ResultPage extends StatefulWidget {
-  const ResultPage({super.key});
+  final String calculatedBMI;
+  final String bmiFeedbackTitle;
+  final String bmiFeedbackDescription;
+
+  const ResultPage({
+    super.key,
+    required this.bmiFeedbackTitle,
+    required this.calculatedBMI,
+    required this.bmiFeedbackDescription,
+  });
 
   @override
   State<ResultPage> createState() => _ResultPageState();
@@ -38,16 +47,16 @@ class _ResultPageState extends State<ResultPage> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  const Text(
-                    "OVERWEIGHT",
+                  Text(
+                    widget.bmiFeedbackTitle,
                     textAlign: TextAlign.center,
                     style: kResultBMIFeedbackTextStyle,
                   ),
-                  Text(result.toString(),
+                  Text(widget.calculatedBMI,
                       textAlign: TextAlign.center,
                       style: kLargeButtonTextStyle.copyWith(fontSize: 100.0)),
-                  const Text(
-                    "You have a higher than normal body weight. Try to exercise more.",
+                  Text(
+                    widget.bmiFeedbackDescription,
                     textAlign: TextAlign.center,
                     style: kResultBMIDescriptionTextStyle,
                   )
